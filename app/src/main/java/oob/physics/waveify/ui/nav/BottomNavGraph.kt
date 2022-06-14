@@ -1,6 +1,9 @@
 package oob.physics.waveify.ui.nav
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -24,7 +27,10 @@ fun BottomNavGraph(
         }
 
         composable(route = BottomNavItem.Quizziz.route) {
-
+            bottomNavController.navigateUp()
+            val context = LocalContext.current
+            val webIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://quizizz.com/"))
+            context.startActivity(webIntent)
         }
     }
 }
