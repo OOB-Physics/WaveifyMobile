@@ -62,7 +62,7 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(24.dp))
         }
 
-        Spacer(modifier = Modifier.size(12.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         HorizontalPager(count = items.size, state = pagerState) { page ->
             val item = items[page]
@@ -83,7 +83,7 @@ fun HomeScreen(
                 ),
                 contentDescription = null,
                 modifier = Modifier
-                    .height(300.dp)
+                    .height(325.dp)
                     .width(350.dp)
                     .graphicsLayer {
                         val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
@@ -116,7 +116,7 @@ fun HomeScreen(
             activeColor = MaterialTheme.colorScheme.secondary
         )
 
-        Spacer(modifier = Modifier.size(24.dp))
+        Spacer(modifier = Modifier.height(24.dp))
         Button(
             onClick = {
                 navController.navigate(selectedItem.route)

@@ -29,7 +29,7 @@ fun BottomNavGraph(
         composable(route = BottomNavItem.Quizziz.route) {
             bottomNavController.navigateUp()
             val context = LocalContext.current
-            val webIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://quizizz.com/"))
+            val webIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://quizizz.com/admin/quiz/62a85ec162c510001e1cc7b6?source=quiz_page"))
             context.startActivity(webIntent)
         }
     }

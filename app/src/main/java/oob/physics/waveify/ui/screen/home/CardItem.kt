@@ -13,13 +13,13 @@ sealed class CardItem(
         route = "em_desc"
     )
 
-    object EMCharacteristics : CardItem(
-        title = "Characteristics of EM Waves",
-        resource = R.raw.wave_anim,
-        route = "em_characteristics"
+    object MaxWellDiscovery : CardItem(
+        title = "MaxWell's Discovery",
+        resource = R.drawable.maxwell,
+        route = "maxwell_discovery"
     )
 
     companion object {
-        val items = listOf(EMDesc, EMCharacteristics)
+        val items = listOf(EMDesc, MaxWellDiscovery)
     }
 }

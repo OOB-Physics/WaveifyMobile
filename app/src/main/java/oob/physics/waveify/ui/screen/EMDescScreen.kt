@@ -1,5 +1,6 @@
 package oob.physics.waveify.ui.screen
 
+import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -13,13 +14,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import androidx.navigation.NavController
-import oob.physics.waveify.R
+import coil.ImageLoader
+import coil.compose.rememberAsyncImagePainter
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
 import oob.physics.waveify.ui.screen.home.CardItem
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -56,15 +61,28 @@ fun EMDescScreen(
             )
 
             var selectedIndex by remember { mutableStateOf(0) }
-            var textfieldSize by remember { mutableStateOf(Size.Zero)}
+            var textfieldSize by remember { mutableStateOf(Size.Zero) }
 
             Image(
                 contentDescription = null,
-                painter = painterResource(id = R.drawable.logo_transparent),
+                painter = rememberAsyncImagePainter(
+                    model = item.resource,
+                    imageLoader = ImageLoader.Builder(LocalContext.current)
+                        .crossfade(true)
+                        .components {
+                            if (Build.VERSION.SDK_INT >= 28) {
+                                add(ImageDecoderDecoder.Factory())
+                            } else {
+                                add(GifDecoder.Factory())
+                            }
+                        }
+                        .build()
+                ),
                 modifier = Modifier
                     .height(300.dp)
-                    .width(350.dp)
-                    .padding(start = 20.dp, end = 20.dp)
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 20.dp),
+                contentScale = ContentScale.FillWidth
             )
 
             Box(modifier = Modifier.padding(20.dp)) {
@@ -72,12 +90,13 @@ fun EMDescScreen(
                     readOnly = true,
                     value = items[selectedIndex].title,
                     onValueChange = {},
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .onGloballyPositioned { coordinates ->
                             //This value is used to assign to the DropDown the same width
                             textfieldSize = coordinates.size.toSize()
                         },
-                    label = { Text("Options") },
+                    label = { Text("Topics") },
                     trailingIcon = {
                         Icon(Icons.Default.ArrowDropDown, "contentDescription",
                             Modifier.clickable { expanded = !expanded })
@@ -88,7 +107,7 @@ fun EMDescScreen(
                     expanded = expanded,
                     onDismissRequest = { expanded = false },
                     modifier = Modifier
-                        .width(with(LocalDensity.current){textfieldSize.width.toDp()})
+                        .width(with(LocalDensity.current) { textfieldSize.width.toDp() })
                 ) {
                     items.forEachIndexed { index, s ->
                         DropdownMenuItem(

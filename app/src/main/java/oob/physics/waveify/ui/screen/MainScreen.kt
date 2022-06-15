@@ -1,9 +1,10 @@
 package oob.physics.waveify.ui.screen
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -14,9 +15,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
+import oob.physics.waveify.R
 import oob.physics.waveify.ui.nav.BottomNavGraph
 import oob.physics.waveify.ui.nav.BottomNavItem
-import oob.physics.waveify.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,7 +43,8 @@ fun MainScreen(
                             contentDescription = null,
                             modifier = Modifier
                                 .size(30.dp)
-                        )},
+                        )
+                    },
                     navigationIcon = {
                         IconButton(onClick = {
                             scope.launch {

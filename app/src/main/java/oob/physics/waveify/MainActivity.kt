@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import oob.physics.waveify.ui.screen.CharacteristicsScreen
 import oob.physics.waveify.ui.screen.EMDescScreen
 import oob.physics.waveify.ui.screen.MainScreen
 import oob.physics.waveify.ui.theme.WaveifyMobileTheme
@@ -68,10 +69,11 @@ fun Navigation() {
         composable("main") {
             MainScreen(navController)
         }
-        composable(
-            route = "em_desc",
-        ) {
+        composable("em_desc") {
             EMDescScreen(navController)
+        }
+        composable("maxwell_discovery") {
+            CharacteristicsScreen(navController)
         }
     }
 }
