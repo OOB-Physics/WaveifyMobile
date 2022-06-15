@@ -7,6 +7,7 @@ import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandHorizontally
+import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -60,10 +61,7 @@ fun Navigation() {
             expandHorizontally()
         },
         exitTransition = {
-            slideOutOfContainer(
-                AnimatedContentScope.SlideDirection.Right,
-                animationSpec = tween(700)
-            )
+            shrinkHorizontally()
         }
     ) {
         composable("main") {
