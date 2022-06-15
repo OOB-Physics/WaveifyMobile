@@ -4,11 +4,7 @@ import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -25,122 +21,93 @@ import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
+import oob.physics.waveify.ui.RoundedCard
 import oob.physics.waveify.ui.screen.home.CardItem
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EMDescScreen(
     navController: NavController
 ) {
     val item = CardItem.EMDesc
-    Scaffold(
-        topBar = {
-            SmallTopAppBar(
-                title = { Text(text = item.title) },
-                navigationIcon = {
-                    IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = null)
-                    }
-                }
-            )
-        }
+    NavigableTopAppBar(
+        title = item.title,
+        navController = navController
     ) {
-        Column(
-            modifier = Modifier
-                .padding(it)
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
-        ) {
-            var expanded by remember { mutableStateOf(false) }
-            val items = listOf(
-                DescItem.Definition,
-                DescItem.SourcesOfEMWaves,
-                DescItem.ReasonsWhyOsc,
-                DescItem.HertzExperiment,
-                DescItem.MediumRequirements
-            )
+        var expanded by remember { mutableStateOf(false) }
+        val items = listOf(
+            DescItem.Definition,
+            DescItem.SourcesOfEMWaves,
+            DescItem.ReasonsWhyOsc,
+            DescItem.HertzExperiment,
+            DescItem.MediumRequirements
+        )
 
-            var selectedIndex by remember { mutableStateOf(0) }
-            var textfieldSize by remember { mutableStateOf(Size.Zero) }
+        var selectedIndex by remember { mutableStateOf(0) }
+        var textfieldSize by remember { mutableStateOf(Size.Zero) }
 
-            Image(
-                contentDescription = null,
-                painter = rememberAsyncImagePainter(
-                    model = item.resource,
-                    imageLoader = ImageLoader.Builder(LocalContext.current)
-                        .crossfade(true)
-                        .components {
-                            if (Build.VERSION.SDK_INT >= 28) {
-                                add(ImageDecoderDecoder.Factory())
-                            } else {
-                                add(GifDecoder.Factory())
-                            }
+        Image(
+            contentDescription = null,
+            painter = rememberAsyncImagePainter(
+                model = item.resource,
+                imageLoader = ImageLoader.Builder(LocalContext.current)
+                    .crossfade(true)
+                    .components {
+                        if (Build.VERSION.SDK_INT >= 28) {
+                            add(ImageDecoderDecoder.Factory())
+                        } else {
+                            add(GifDecoder.Factory())
                         }
-                        .build()
-                ),
+                    }
+                    .build()
+            ),
+            modifier = Modifier
+                .height(300.dp)
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp),
+            contentScale = ContentScale.FillWidth
+        )
+
+        Box(modifier = Modifier.padding(20.dp)) {
+            OutlinedTextField(
+                readOnly = true,
+                value = items[selectedIndex].title,
+                onValueChange = {},
                 modifier = Modifier
-                    .height(300.dp)
                     .fillMaxWidth()
-                    .padding(start = 20.dp, end = 20.dp),
-                contentScale = ContentScale.FillWidth
+                    .onGloballyPositioned { coordinates ->
+                        //This value is used to assign to the DropDown the same width
+                        textfieldSize = coordinates.size.toSize()
+                    },
+                label = { Text("Topics") },
+                trailingIcon = {
+                    Icon(Icons.Default.ArrowDropDown, "contentDescription",
+                        Modifier.clickable { expanded = !expanded })
+                }
             )
 
-            Box(modifier = Modifier.padding(20.dp)) {
-                OutlinedTextField(
-                    readOnly = true,
-                    value = items[selectedIndex].title,
-                    onValueChange = {},
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .onGloballyPositioned { coordinates ->
-                            //This value is used to assign to the DropDown the same width
-                            textfieldSize = coordinates.size.toSize()
-                        },
-                    label = { Text("Topics") },
-                    trailingIcon = {
-                        Icon(Icons.Default.ArrowDropDown, "contentDescription",
-                            Modifier.clickable { expanded = !expanded })
-                    }
-                )
-
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false },
-                    modifier = Modifier
-                        .width(with(LocalDensity.current) { textfieldSize.width.toDp() })
-                ) {
-                    items.forEachIndexed { index, s ->
-                        DropdownMenuItem(
-                            text = { Text(s.title) },
-                            onClick = {
-                                selectedIndex = index
-                                expanded = false
-                            }
-                        )
-                    }
-                }
-            }
-
-            Card(
-                shape = RoundedCornerShape(16.dp),
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false },
                 modifier = Modifier
-                    .padding(top = 40.dp, start = 16.dp, end = 16.dp, bottom = 8.dp),
+                    .width(with(LocalDensity.current) { textfieldSize.width.toDp() })
             ) {
-                Column(
-                    modifier = Modifier
-                        .padding(start = 20.dp, end = 20.dp)
-                        .fillMaxSize()
-                ) {
-                    Spacer(modifier = Modifier.height(24.dp))
-                    Text(
-                        text = items[selectedIndex].description,
-                        style = MaterialTheme.typography.bodyLarge,
+                items.forEachIndexed { index, s ->
+                    DropdownMenuItem(
+                        text = { Text(s.title) },
+                        onClick = {
+                            selectedIndex = index
+                            expanded = false
+                        }
                     )
-
-                    Spacer(modifier = Modifier.height(24.dp))
                 }
-
             }
+        }
+
+        RoundedCard {
+            Text(
+                text = items[selectedIndex].description,
+                style = MaterialTheme.typography.bodyLarge,
+            )
         }
     }
 }

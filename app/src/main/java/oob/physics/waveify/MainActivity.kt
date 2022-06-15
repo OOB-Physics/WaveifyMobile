@@ -73,5 +73,8 @@ fun Navigation() {
         composable("maxwell_discovery") {
             CharacteristicsScreen(navController)
         }
+        composable("em_spectrum") {
+
+        }
     }
 }

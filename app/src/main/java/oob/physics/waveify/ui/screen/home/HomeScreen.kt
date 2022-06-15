@@ -56,7 +56,7 @@ fun HomeScreen(
 
             Text(
                 text = selectedItem.title,
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.titleLarge
             )
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -103,7 +103,7 @@ fun HomeScreen(
                             fraction = 1f - pageOffset.coerceIn(0f, 1f)
                         )
                     },
-                contentScale = ContentScale.FillHeight
+                contentScale = item.contentScale
             )
 
         }
