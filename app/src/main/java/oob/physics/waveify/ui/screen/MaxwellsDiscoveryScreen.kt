@@ -1,6 +1,7 @@
 package oob.physics.waveify.ui.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,6 +12,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -47,14 +49,19 @@ fun CharacteristicsScreen(
                         style = MaterialTheme.typography.bodyLarge
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
 
-                    Image(
-                        painter = painterResource(id = R.drawable.formula1),
-                        contentDescription = null
-                    )
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment  = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.formula1),
+                            contentDescription = null
+                        )
+                    }
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(20.dp))
 
                     Text(
                         text = "where i denotes the current threading the surface bounded by closed path C.",
@@ -79,6 +86,19 @@ fun CharacteristicsScreen(
 
                     Spacer(modifier = Modifier.height(20.dp))
 
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment  = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.diagram1),
+                            contentDescription = null
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+
                     Text(
                         text = "Since the loop C1 has a current i flowing across it, hence Ampere circuital law for loop C1 gives:",
                         style = MaterialTheme.typography.bodyMedium
@@ -86,10 +106,15 @@ fun CharacteristicsScreen(
 
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    Image(
-                        painter = painterResource(id = R.drawable.formula2),
-                        contentDescription = null
-                    )
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment  = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.formula2),
+                            contentDescription = null
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(20.dp))
 
@@ -100,11 +125,15 @@ fun CharacteristicsScreen(
 
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    Image(
-                        painter = painterResource(id = R.drawable.formula3),
-                        contentDescription = null
-                    )
-
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment  = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.formula3),
+                            contentDescription = null
+                        )
+                    }
                     Spacer(modifier = Modifier.height(20.dp))
 
                     Text(
@@ -121,10 +150,15 @@ fun CharacteristicsScreen(
 
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    Image(
-                        painter = painterResource(id = R.drawable.formula4),
-                        contentDescription = null
-                    )
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment  = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.formula4),
+                            contentDescription = null
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(20.dp))
 
@@ -140,10 +174,15 @@ fun CharacteristicsScreen(
 
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    Image(
-                        painter = painterResource(id = R.drawable.formula5),
-                        contentDescription = null
-                    )
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment  = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.formula5),
+                            contentDescription = null
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(20.dp))
 
