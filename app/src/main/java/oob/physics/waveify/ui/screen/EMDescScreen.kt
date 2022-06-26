@@ -22,6 +22,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import oob.physics.waveify.ui.RoundedCard
+import oob.physics.waveify.ui.WideRoundedCard
 import oob.physics.waveify.ui.screen.home.CardItem
 
 @Composable
@@ -103,7 +104,7 @@ fun EMDescScreen(
             }
         }
 
-        RoundedCard {
+        WideRoundedCard {
             Text(
                 text = items[selectedIndex].description,
                 style = MaterialTheme.typography.bodyLarge,

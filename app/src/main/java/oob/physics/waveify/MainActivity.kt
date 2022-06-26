@@ -20,6 +20,9 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import oob.physics.waveify.ui.screen.CharacteristicsScreen
 import oob.physics.waveify.ui.screen.EMDescScreen
 import oob.physics.waveify.ui.screen.MainScreen
+import oob.physics.waveify.ui.screen.SpectrumScreen
+import oob.physics.waveify.ui.screen.home.CardItem
+import oob.physics.waveify.ui.screen.type.EMTypeScreen
 import oob.physics.waveify.ui.theme.WaveifyMobileTheme
 
 class MainActivity : ComponentActivity() {
@@ -74,7 +77,13 @@ fun Navigation() {
             CharacteristicsScreen(navController)
         }
         composable("em_spectrum") {
+            SpectrumScreen(navController)
+        }
 
+        EMType.values().forEach { emType ->
+            composable(emType.route) {
+                EMTypeScreen(emType = emType, navController = navController)
+            }
         }
     }
 }

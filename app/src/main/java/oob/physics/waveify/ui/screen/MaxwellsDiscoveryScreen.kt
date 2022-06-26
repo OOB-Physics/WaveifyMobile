@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import oob.physics.waveify.R
 import oob.physics.waveify.ui.RoundedCard
+import oob.physics.waveify.ui.WideRoundedCard
 import oob.physics.waveify.ui.screen.home.CardItem
 
 @Composable
@@ -23,7 +24,7 @@ fun CharacteristicsScreen(
         title = item.title,
         navController = navController
     ) {
-        RoundedCard {
+        WideRoundedCard {
             Text(
                 text = "According to Ampere’s circuital law, the magnetic field B is related to " +
                         "steady current i as",
@@ -51,7 +52,7 @@ fun CharacteristicsScreen(
         }
 
 
-        RoundedCard {
+        WideRoundedCard {
             Text(
                 text = "Maxwell in 1864, showed that the above relation is logically" +
                         "inconsistent. He accounted this inconsistency as follows : ",
@@ -173,7 +174,7 @@ fun CharacteristicsScreen(
             )
         }
 
-        RoundedCard {
+        WideRoundedCard {
             Text(
                 text = "Continuity of current:",
                 style = MaterialTheme.typography.titleLarge
@@ -195,7 +196,7 @@ fun CharacteristicsScreen(
             )
         }
 
-        RoundedCard {
+        WideRoundedCard {
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 Image(
                     painter = painterResource(id = R.drawable.formula6),
