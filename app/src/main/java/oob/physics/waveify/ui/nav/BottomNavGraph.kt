@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import oob.physics.waveify.ui.screen.AboutUsScreen
 import oob.physics.waveify.ui.screen.home.HomeScreen
 
 @Composable
@@ -23,13 +24,13 @@ fun BottomNavGraph(
             HomeScreen(mainNavController)
         }
         composable(route = BottomNavItem.AboutUs.route) {
-
+            AboutUsScreen()
         }
 
         composable(route = BottomNavItem.Quizziz.route) {
             bottomNavController.navigateUp()
             val context = LocalContext.current
-            val webIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://quizizz.com/admin/quiz/62a85ec162c510001e1cc7b6?source=quiz_page"))
+            val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://quizizz.com/admin/quiz/62a85ec162c510001e1cc7b6?source=quiz_page"))
             context.startActivity(webIntent)
         }
     }

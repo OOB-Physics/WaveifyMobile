@@ -26,55 +26,38 @@ fun MainScreen(
 ) {
     val bottomNavController = rememberNavController()
 
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
-
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {}
-    ) {
-        Scaffold(
-            topBar = {
-                CenterAlignedTopAppBar(
-                    title = {
-                        val painter = painterResource(id = R.drawable.logo_transparent)
-                        Image(
-                            painter = painter,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(30.dp)
-                        )
-                    },
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            scope.launch {
-                                drawerState.open()
-                            }
-                        }) {
-                            Icon(Icons.Filled.Menu, contentDescription = null)
-                        }
-                    }
-                )
-            },
-            bottomBar = {
-                BottomNavBar(
-                    items = BottomNavItem.items,
-                    navController = bottomNavController,
-                    onItemClick = {
-                        bottomNavController.navigate(it.route)
-                    }
-                )
-            },
-            content = {
-                Surface(
-                    modifier = Modifier
-                        .padding(it)
-                ) {
-                    BottomNavGraph(bottomNavController, mainNavController)
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    val painter = painterResource(id = R.drawable.logo_transparent)
+                    Image(
+                        painter = painter,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(50.dp)
+                    )
                 }
+            )
+        },
+        bottomBar = {
+            BottomNavBar(
+                items = BottomNavItem.items,
+                navController = bottomNavController,
+                onItemClick = {
+                    bottomNavController.navigate(it.route)
+                }
+            )
+        },
+        content = {
+            Surface(
+                modifier = Modifier
+                    .padding(it)
+            ) {
+                BottomNavGraph(bottomNavController, mainNavController)
             }
-        )
-    }
+        }
+    )
 
 }
 

@@ -2,10 +2,7 @@ package oob.physics.waveify.ui.screen.type
 
 import android.os.Build
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +28,24 @@ fun EMTypeScreen(
         title = emType.title,
         navController = navController
     ) {
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            RoundedCard(
+
+            ) {
+                Text(
+                    text = "V: ${emType.frequency}",
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "λ: ${emType.wavelength}",
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+        }
+
         Image(
             contentDescription = null,
             painter = rememberAsyncImagePainter(
@@ -52,18 +67,6 @@ fun EMTypeScreen(
                 .padding(start = 20.dp, end = 20.dp),
             contentScale = ContentScale.FillBounds
         )
-
-        RoundedCard {
-            Text(
-                text = "V: ${emType.frequency}",
-                style = MaterialTheme.typography.bodyLarge
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "λ: ${emType.wavelength}",
-                style = MaterialTheme.typography.bodyLarge
-            )
-        }
         
         RoundedCard {
             Text(
