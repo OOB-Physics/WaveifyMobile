@@ -11,12 +11,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import oob.physics.waveify.R
-import oob.physics.waveify.ui.RoundedCard
 import oob.physics.waveify.ui.WideRoundedCard
-import oob.physics.waveify.ui.screen.home.CardItem
 
 @Composable
-fun CharacteristicsScreen(
+fun MaxwellsDiscoveryScreen(
     navController: NavController
 ) {
     val item = CardItem.MaxWellDiscovery

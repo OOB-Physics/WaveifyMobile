@@ -1,4 +1,4 @@
-package oob.physics.waveify.ui.screen.home
+package oob.physics.waveify.ui.screen
 
 import android.os.Build.VERSION.SDK_INT
 import androidx.compose.foundation.Image
@@ -22,14 +22,41 @@ import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.google.accompanist.pager.*
 import oob.physics.waveify.R
+import oob.physics.waveify.ui.MainDestinations
 import kotlin.math.absoluteValue
+
+enum class CardItem(
+    val title: String,
+    val resource: Int,
+    val route: String,
+    val contentScale: ContentScale = ContentScale.FillHeight
+) {
+    EMDesc(
+        title = "What are Electromagnetic Waves?",
+        resource = R.raw.wave_anim,
+        route = MainDestinations.EM_DESCRIPTION
+    ),
+
+    MaxWellDiscovery(
+        title = "MaxWell's Discovery",
+        resource = R.drawable.maxwell,
+        route = MainDestinations.MAXWELLS_DISCOVERY
+    ),
+
+    Spectrum(
+        title = "The Electromagnetic Spectrum",
+        resource = R.drawable.spectrum,
+        route = MainDestinations.SPECTRUM,
+        contentScale = ContentScale.Fit
+    )
+}
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HomeScreen(
     navController: NavController
 ) {
-    val items = CardItem.items
+    val items = CardItem.values()
     var selectedItem by remember { mutableStateOf(items[0]) }
 
     val pagerState = rememberPagerState()

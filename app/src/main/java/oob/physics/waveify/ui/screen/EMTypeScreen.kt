@@ -1,4 +1,4 @@
-package oob.physics.waveify.ui.screen.type
+package oob.physics.waveify.ui.screen
 
 import android.os.Build
 import androidx.compose.foundation.Image
@@ -17,13 +17,13 @@ import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import oob.physics.waveify.EMType
 import oob.physics.waveify.ui.RoundedCard
-import oob.physics.waveify.ui.screen.NavigableTopAppBar
 
 @Composable
 fun EMTypeScreen(
-    emType: EMType,
+    type: String,
     navController: NavController
 ) {
+    val emType = EMType.values().first { it.title == type }
     NavigableTopAppBar(
         title = emType.title,
         navController = navController
@@ -31,9 +31,7 @@ fun EMTypeScreen(
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
-            RoundedCard(
-
-            ) {
+            RoundedCard {
                 Text(
                     text = "V: ${emType.frequency}",
                     style = MaterialTheme.typography.bodySmall
@@ -67,7 +65,7 @@ fun EMTypeScreen(
                 .padding(start = 20.dp, end = 20.dp),
             contentScale = ContentScale.FillBounds
         )
-        
+
         RoundedCard {
             Text(
                 text = "Production",

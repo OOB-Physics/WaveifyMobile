@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import oob.physics.waveify.ui.RoundedCard
 import oob.physics.waveify.ui.WideRoundedCard
 
-sealed class EMType(
+enum class EMType(
     val resourceId: Int,
     val title: String,
     val route: String,
@@ -22,7 +22,7 @@ sealed class EMType(
     val uses: String,
     val extraContent: @Composable () -> Unit = {},
 ) {
-    object Microwave : EMType(
+    Microwave(
         resourceId = R.drawable.anim_micro,
         title = "Microwave",
         route = "microwave",
@@ -50,9 +50,9 @@ sealed class EMType(
                 )
             }
         }
-    )
+    ),
 
-    object UltraViolet : EMType(
+    UltraViolet(
         resourceId = R.drawable.anim_uv,
         title = "Ultra Violet",
         route = "ultraviolet",
@@ -80,9 +80,9 @@ sealed class EMType(
                 )
             }
         }
-    )
+    ),
 
-    object XRay : EMType(
+    XRay(
         resourceId = R.drawable.anim_xray,
         title = "X-Ray",
         route = "xray",
@@ -93,9 +93,9 @@ sealed class EMType(
         uses = "X rays are widely used in medical applications. They are used as a diagnostic tool in medicine as a treatment for certain forms of cancer.\n" +
                 "\n" +
                 "But care must be taken whole using X rays because they have the ability to cause severe damage to organs and destroy tissues and organisms."
-    )
+    ),
 
-    object RadioWave : EMType(
+    RadioWave(
         resourceId = R.drawable.anim_radio,
         title = "Radio Waves",
         route = "radiowaves",
@@ -106,9 +106,9 @@ sealed class EMType(
         uses = "1. They are primarily used in radio wave communication using antenna,etc.\n" +
                 "2. Cell phones transmit voice communication in the UHF band(ultra high frequency).\n" +
                 "3. TV ranges include 54 MHz to 890 MHz"
-    )
+    ),
 
-    object Infrared : EMType(
+    Infrared(
         resourceId = R.drawable.anim_infrared,
         title = "Infrared",
         route = "infrared",
@@ -136,9 +136,9 @@ sealed class EMType(
                 )
             }
         }
-    )
+    ),
 
-    object Visible : EMType(
+    Visible(
         resourceId = R.drawable.anim_visible,
         title = "Visible Rays",
         route = "visible",
@@ -162,10 +162,4 @@ sealed class EMType(
             }
         }
     )
-
-
-    companion object {
-        fun values(): List<EMType> =
-            listOf(Microwave, UltraViolet, Infrared, Visible, XRay, RadioWave)
-    }
 }

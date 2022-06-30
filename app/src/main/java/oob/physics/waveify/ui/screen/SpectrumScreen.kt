@@ -1,7 +1,9 @@
 package oob.physics.waveify.ui.screen
 
 import android.os.Build
-import androidx.compose.foundation.*
+import android.util.Log
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -11,18 +13,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.google.accompanist.pager.*
 import oob.physics.waveify.EMType
-import oob.physics.waveify.ui.RoundedCard
-import oob.physics.waveify.ui.screen.home.CardItem
+import oob.physics.waveify.ui.MainDestinations
 import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalPagerApi::class)
@@ -130,7 +131,15 @@ fun SpectrumScreen(
                                 stop = 1f,
                                 fraction = 1f - pageOffset.coerceIn(0f, 1f)
                             )
-                        }.clickable { navController.navigate(items[page].route) },
+                        }
+                        .clickable {
+                            navController.navigate(
+                                MainDestinations.EM_TYPE.replace(
+                                    "{id}",
+                                    items[page].route
+                                )
+                            )
+                        },
                     contentScale = item.contentScale
                 )
 
@@ -144,45 +153,5 @@ fun SpectrumScreen(
                 activeColor = MaterialTheme.colorScheme.secondary
             )
         }
-    }
-}
-
-@Composable
-fun EmTypeItem(
-    navController: NavController,
-    emType: EMType
-) {
-    RoundedCard(
-        modifier = Modifier
-            .clickable { navController.navigate(emType.route) }
-    ) {
-        Image(
-            painter = rememberAsyncImagePainter(
-                model = emType.resourceId,
-                imageLoader = ImageLoader.Builder(LocalContext.current)
-                    .crossfade(true)
-                    .components {
-                        if (Build.VERSION.SDK_INT >= 28) {
-                            add(ImageDecoderDecoder.Factory())
-                        } else {
-                            add(GifDecoder.Factory())
-                        }
-                    }
-                    .build()
-            ),
-            contentDescription = null,
-            modifier = Modifier
-                .height(150.dp)
-                .width(225.dp)
-                .fillMaxSize(),
-            contentScale = ContentScale.FillBounds
-        )
-
-        Spacer(modifier = Modifier.height(25.dp))
-
-        Text(
-            text = emType.title,
-            style = MaterialTheme.typography.titleSmall
-        )
     }
 }

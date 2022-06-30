@@ -1,30 +1,28 @@
 package oob.physics.waveify.ui.screen
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import kotlinx.coroutines.launch
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import oob.physics.waveify.ui.BottomNavGraph
+import oob.physics.waveify.ui.BottomNavTabs
 import oob.physics.waveify.R
-import oob.physics.waveify.ui.nav.BottomNavGraph
-import oob.physics.waveify.ui.nav.BottomNavItem
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
 fun MainScreen(
     mainNavController: NavController
 ) {
-    val bottomNavController = rememberNavController()
+    val bottomNavController = rememberAnimatedNavController()
 
     Scaffold(
         topBar = {
@@ -42,7 +40,6 @@ fun MainScreen(
         },
         bottomBar = {
             BottomNavBar(
-                items = BottomNavItem.items,
                 navController = bottomNavController,
                 onItemClick = {
                     bottomNavController.navigate(it.route)
@@ -63,9 +60,9 @@ fun MainScreen(
 
 @Composable
 fun BottomNavBar(
-    items: List<BottomNavItem>,
+    items: Array<BottomNavTabs> = BottomNavTabs.values(),
     navController: NavController,
-    onItemClick: (BottomNavItem) -> Unit
+    onItemClick: (BottomNavTabs) -> Unit
 ) {
     val backStackEntry = navController.currentBackStackEntryAsState()
 
